@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zhs on My New Hugo Site</title>
+    <link>http://localhost:1313/zh/zh/</link>
+    <description>Recent content in Zhs on My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 01 Jul 2024 19:03:18 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>帖子 1</title>
+      <link>http://localhost:1313/zh/zh/posts/post-1/</link>
+      <pubDate>Mon, 01 Jul 2024 19:03:18 +0800</pubDate>
+      <guid>http://localhost:1313/zh/zh/posts/post-1/</guid>
+      <description>简介 这是 粗体 文字，这是 强调 文字。&#xA;请访问 Hugo 网站！</description>
+    </item>
+  </channel>
+</rss>

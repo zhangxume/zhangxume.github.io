@@ -1,4 +1,43 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>My New Hugo Site</title><link>https://zhangxume.github.io/</link><description>Recent content on My New Hugo Site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 01 Jul 2024 19:03:18 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Post 1</title><link>https://zhangxume.github.io/posts/post-1/</link><pubDate>Mon, 01 Jul 2024 19:03:18 +0800</pubDate><guid>https://zhangxume.github.io/posts/post-1/</guid><description>My New Hugo Site https://zhangxume.github.io/posts/post-1/ -&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>This is &lt;strong>bold&lt;/strong> text, and this is &lt;em>emphasized&lt;/em> text.&lt;/p>
-&lt;p>Visit the &lt;a href="https://gohugo.io">Hugo&lt;/a> website!&lt;/p>
-- https://zhangxume.github.io/posts/post-1/ -</description></item></channel></rss>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 01 Jul 2024 19:03:18 +0800</lastBuildDate>
+    
+        <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Post 1</title>
+        <link>http://localhost:1313/en/posts/post-1/</link>
+        <pubDate>Mon, 01 Jul 2024 19:03:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/en/posts/post-1/</guid>
+        <description>My New Hugo Site http://localhost:1313/en/posts/post-1/ -&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;
+&lt;p&gt;Visit the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website!&lt;/p&gt;
+- http://localhost:1313/en/posts/post-1/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>帖子 1</title>
+        <link>http://localhost:1313/zh/posts/post-1/</link>
+        <pubDate>Mon, 01 Jul 2024 19:03:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/zh/posts/post-1/</guid>
+        <description>My New Hugo Site http://localhost:1313/zh/posts/post-1/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;这是 &lt;strong&gt;粗体&lt;/strong&gt; 文字，这是 &lt;em&gt;强调&lt;/em&gt; 文字。&lt;/p&gt;
+&lt;p&gt;请访问 &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; 网站！&lt;/p&gt;
+- http://localhost:1313/zh/posts/post-1/ - </description>
+        </item>
+    
+    
+  </channel>
+</rss> 
