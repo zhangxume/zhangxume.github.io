@@ -44,7 +44,7 @@ $\underset{||x||_1=1}{\max}||Ax||_1$&lt;/li>
 &lt;li>induced matrix norm&lt;br>
 $\underset{||x||_2=1}{\max}||Ax||_2$&lt;/li>
 &lt;/ul>
-&lt;p>$\vert\vert A\vert\vert_1=\underbrace{\max_i\sum_{j=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of rows}}$&lt;/p>
+&lt;p>$\vert\vert A\vert\vert_\infty=\underbrace{\max_i\sum_{j=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of rows}}$&lt;/p>
 &lt;ul>
 &lt;li>induced matrix norm&lt;br>
 $\max_{\vert\vert x\vert\vert_\infty=1}||Ax||_\infty$&lt;/li>
