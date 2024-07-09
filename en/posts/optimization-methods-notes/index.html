@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<title>Optimization Methods Notes (1)</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="AhgOkBbR9fij0YRG2isWs7OrMnRTSjN6T7wyokmfo1g">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="Optimization, Infimum, Norm, Positive definite matrices, Taylor&#39;s theorem">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-BH6CKQ7KJ3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-BH6CKQ7KJ3');
+        }
+      </script>
+    
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+      <script src="/js/toc.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/scss/dark-mode.min.c0a9f31016271b3c858e705fbf78b106a3ad349fa8043431df51d11d599422aa.css" integrity="sha256-wKnzEBYnGzyFjnBfv3ixBqOtNJ&#43;oBDQx31HRHVmUIqo=" media="screen">
+
+
+<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Material+Icons">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css" integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js" integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/en/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/en/about">
+                    About
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#optimization" class="nav-optimization">
+									Optimization
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#infimum" class="nav-infimum">
+									Infimum
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#norm" class="nav-norm">
+									Norm
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#common-vector-norms" class="nav-common-vector-norms">
+									Common vector norms
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#common-matrix-norms" class="nav-common-matrix-norms">
+									Common matrix norms
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#positive-definite-matrices" class="nav-positive-definite-matrices">
+									Positive definite matrices
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#positive-semidefinite-matrices" class="nav-positive-semidefinite-matrices">
+									Positive semidefinite matrices
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#positive-definite-matrices-1" class="nav-positive-definite-matrices-1">
+									Positive definite matrices
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#taylors-theorem" class="nav-taylors-theorem">
+									Taylor’s theorem
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#with-remainder-term" class="nav-with-remainder-term">
+									with remainder term
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#with-remainder-term-high-dimensional" class="nav-with-remainder-term-high-dimensional">
+									with remainder term high-dimensional
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="http://localhost:1313/en/">
+            Zephyr&#39;s Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+        
+        
+        
+        <a class="material-icons pagination-action pagination-action-icon" href ="/zh/posts/optimization-methods-notes/" >
+                translate
+          
+        </a>
+        
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://localhost:1313/en/">
+        <div class="single-column-header-title">Zephyr&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Write Something</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                
+                    
+                    
+                    style="background-image: url('http://localhost:1313/images/optimization.png')"
+                    
+                
+            >
+                <div class="post-title">
+                    Optimization Methods Notes (1)
+                    
+                    <div class="post-subtitle">
+                        Optimization, Infimum, Norm, Positive definite matrices, Taylor&#39;s theorem
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2023-09-22 21:11
+                        </time>
+                        
+
+                        
+
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            1 min
+                            
+                            45 s.
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="optimization">Optimization</h1>
+<p>Optimization finds the &ldquo;best&rdquo; possible solutions from a set of feasible points.</p>
+<p>An optimization problem takes the form of minimizing (or maximizing) an objective function subject to constraints:</p>
+<p>$$
+\begin{array}{ll}\mathrm{Minimize}&amp;f(x) \\
+\mathrm{subject~to}&amp;x\in\Omega.\end{array}
+$$</p>
+<ul>
+<li>$x\in\mathbb{R}^n$ is called decision variables.</li>
+<li>$f$ is called the objective function.</li>
+<li>$\Omega\subseteq\mathbb{R}^n$ is called the constraint set / feasible set / feasible region.</li>
+</ul>
+<p>The symmetry of $G$ can be assume without loss of generality:<br>
+for any $H\in\mathbb{R}^{n\times n}$ (no symmetric) and $x\in\mathbb{R}^n$, we have:
+$$\lbrack x^THx\rbrack_{1\times 1}=\lbrack x^THx\rbrack^T_{1\times 1}=x^TH^Tx$$
+so:
+$$x^THx=x^TH^Tx=\frac12x^T(\underbrace{H^T+H}_{\text{symmetric matrix $G$}})x.$$
+For $f(x)=\frac12x^TGx+c^Tx+\beta$ with $G\in\mathbb{R}^{n\times n}$ being symmetric, so:
+$$\nabla f(x)=Gx+c.$$</p>
+<h1 id="infimum">Infimum</h1>
+<p>$l=\inf S, \inf\emptyset=\infty$<br>
+Let $S\subseteq\mathbb{R}$ be a nonempty set. We say that $l\in[-\infty, \infty)$ is the infimum of $S$, if:</p>
+<ul>
+<li>for every $s\in S, s \geq l$</li>
+<li>for every $\zeta&gt;l(\zeta\in\mathbb{R})$, one can find $s\in S$ so that $s&lt;\zeta$</li>
+</ul>
+<p>infimum is the largest number that is smaller than everything in $S$.<br>
+refer to set the infimum value as the optimal value.</p>
+<h1 id="norm">Norm</h1>
+<h2 id="common-vector-norms">Common vector norms</h2>
+<ul>
+<li>$l_1$ norm: $\vert\vert x\vert\vert_1:=\sum_{i=1}^{n}|x_i|\quad$ (sum of abs value)</li>
+<li>$l_2$ norm: $\vert\vert x\vert\vert_2:=\sqrt{\sum_{i=1}^{n}|x_i|^2}\quad$ ($\vert\vert x\vert\vert_2^2=\begin{bmatrix}x1&amp;x2\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=x^Tx$)</li>
+<li>$l_\infty$ norm: $\vert\vert x\vert\vert_\infty:=\max_{i\leq i\leq n}|x_i|\quad$ (max abs value)</li>
+</ul>
+<h2 id="common-matrix-norms">Common matrix norms</h2>
+<p>$\vert\vert A\vert\vert_1=\underbrace{\max_j\sum_{i=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of columns}}$</p>
+<ul>
+<li>induced matrix norm<br>
+$\underset{||x||_1=1}{\max}||Ax||_1$</li>
+</ul>
+<p>$\vert\vert A\vert\vert_2=\underbrace{\sqrt{\lambda_{max}(A^TA)}}_{\text{maximum eigenvalue of $A^TA$}}$</p>
+<ul>
+<li>induced matrix norm<br>
+$\underset{||x||_2=1}{\max}||Ax||_2$</li>
+</ul>
+<p>$\vert\vert A\vert\vert_1=\underbrace{\max_i\sum_{j=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of rows}}$</p>
+<ul>
+<li>induced matrix norm<br>
+$\max_{\vert\vert x\vert\vert_\infty=1}||Ax||_\infty$</li>
+</ul>
+<p>$\vert\vert A\vert\vert_F=\underbrace{\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2}}_{\text{known as the Frobenius norm}}$</p>
+<p>For symmetric A<br>
+$$\underset{||x||=1}{\min}x^TAx=\lambda_{\min}(A)$$
+$$\underset{||x||=1}{\max}x^TAx=\lambda_{\max}(A)\xlongequal[]{if A\succ0}||A||_2$$</p>
+<h1 id="positive-definite-matrices">Positive definite matrices</h1>
+<h2 id="positive-semidefinite-matrices">Positive semidefinite matrices</h2>
+<p>Let $A\in\mathbb{R}^{n\times n}$ be symmetric, we say that $A$ is positive semidefinite if $x^TAx\geq0$, for all $x\in\mathbb{R}^{n}$. $A\succeq0$<br>
+Example:<br>
+$$A=\left[\begin{matrix}3&amp;1\\1&amp;2\end{matrix}\right]$$
+$$x^TAx=\left[\begin{matrix}x1&amp;x2\end{matrix}\right]\left[\begin{matrix}3&amp;1\\1&amp;2\end{matrix}\right]\left[\begin{matrix}x1\\x2\end{matrix}\right]$$
+$$=3x_1^2+2x_1x_2+2x_2^2$$
+$$=2x_1^2+(x_1+x_2)^2+x_2^2\geq0$$</p>
+<h2 id="positive-definite-matrices-1">Positive definite matrices</h2>
+<p>Let $A\in\mathbb{R}^{n\times n}$ be symmetric, we say that $A$ is positive definite if $x^TAx&gt;0$, for all $x\in\mathbb{R}^{n}$\{0}.<br>
+$A\succ0$</p>
+<p>if $D\succ0$ (positive definite)<br>
+$d=-D\nabla f(x)$ is a descent direction</p>
+<h1 id="taylors-theorem">Taylor&rsquo;s theorem</h1>
+<h2 id="with-remainder-term">with remainder term</h2>
+<p>Suppose $f$ is (n+1) times differentiable on an open interval containing $[a,b]$. Then:
+$$
+f(b) = f(a) + f&rsquo;(a)(b-a) + \frac{f&rsquo;&rsquo;(a)}{2!}(b-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(b-a)^n + \frac{f^{(n+1)}(\xi)}{(n+1)!}(b-a)^{n+1}
+$$
+for some ${\xi \in (a,b)}$.</p>
+<h2 id="with-remainder-term-high-dimensional">with remainder term high-dimensional</h2>
+<p>Let $f\in C^1(\mathbb{R}^n)$, $x$ and $y\in\mathbb{R}^n$. Then there exists
+$\xi\in{(1-s)x+sy:s\in(0,1)}$ such that
+$$f(y)=f(x)+[\nabla f(\xi)]^T(y-x).$$</p>
+<p>Let $f\in C^2(\mathbb{R}^n)$, $x$ and $y\in\mathbb{R}^n$. Then there exists
+$\xi\in {(1-s)x + sy : s \in (0,1)}$ such that
+$$f(y) = f(x) + [\nabla f(x)]^T (y - x) + \frac{1}{2}(y - x)^T \nabla^2 f(\xi) (y - x).
+$$</p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">Last modified on 2023-09-22</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+			Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/en/posts/ielts-self-study-guide/">
+			Previous<br>IELTS Self Study Guide
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://localhost:1313/en/">
+    
+        <div class="nav-title">
+            Zephyr&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Write Something
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/en/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/en/about">
+                About
+            </a>
+            
+        
+    </div>
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2024 Zephyr. All rights reserved.
+	
+
+    </div>
+
+</div><div id="extraContainer" class="extra-container">
+    <div class="toc-wrapper">
+        
+
+        
+        <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#optimization" class="nav-optimization">
+									Optimization
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#infimum" class="nav-infimum">
+									Infimum
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#norm" class="nav-norm">
+									Norm
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#common-vector-norms" class="nav-common-vector-norms">
+									Common vector norms
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#common-matrix-norms" class="nav-common-matrix-norms">
+									Common matrix norms
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#positive-definite-matrices" class="nav-positive-definite-matrices">
+									Positive definite matrices
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#positive-semidefinite-matrices" class="nav-positive-semidefinite-matrices">
+									Positive semidefinite matrices
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#positive-definite-matrices-1" class="nav-positive-definite-matrices-1">
+									Positive definite matrices
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#taylors-theorem" class="nav-taylors-theorem">
+									Taylor’s theorem
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#with-remainder-term" class="nav-with-remainder-term">
+									with remainder term
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#with-remainder-term-high-dimensional" class="nav-with-remainder-term-high-dimensional">
+									with remainder term high-dimensional
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+        
+    </div>
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top"
+            :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+        
+        
+        <a class="material-icons pagination-action pagination-action-icon" href ="/zh/posts/optimization-methods-notes/" >
+                translate
+          
+        </a>
+        
+        
+        
+    </div>
+</div>
+
+<div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2024 Zephyr. All rights reserved.
+	
+</div>
+            </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    <meting-js
+        server="netease"
+        type="song"
+        id="2047848296"
+        fixed="true">
+    </meting-js>
+
+    
+    <script src="/js/journal.js"></script></body>
+</html>
