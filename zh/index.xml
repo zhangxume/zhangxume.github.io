@@ -1,4 +1,88 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/zh/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Fri, 22 Sep 2023 21:11:46 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>雅思自学指南</title><link>https://zhangxume.github.io/zh/posts/ielts-self-study-guide/</link><pubDate>Sat, 05 Aug 2023 13:03:04 +0800</pubDate><guid>https://zhangxume.github.io/zh/posts/ielts-self-study-guide/</guid><description>Zephyr's Blog https://zhangxume.github.io/zh/posts/ielts-self-study-guide/ -&lt;h1 id="前言">前言&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/zh/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Fri, 22 Sep 2023 21:11:46 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>最优化方法笔记 (1)</title><link>https://zhangxume.github.io/zh/posts/optimization-methods-notes/</link><pubDate>Fri, 22 Sep 2023 21:11:46 +0800</pubDate><guid>https://zhangxume.github.io/zh/posts/optimization-methods-notes/</guid><description>Zephyr's Blog https://zhangxume.github.io/zh/posts/optimization-methods-notes/ -&lt;h1 id="最优化">最优化&lt;/h1>
+&lt;p>最优化从一组可行点中找到“最佳”解决方案。&lt;/p>
+&lt;p>一个优化问题的形式是最小化（或最大化）目标函数，受制于约束条件：
+$$
+\begin{array}{ll}\mathrm{Minimize}&amp;amp;f(x) \\
+\mathrm{subject~to}&amp;amp;x\in\Omega.\end{array}
+$$&lt;/p>
+&lt;ul>
+&lt;li>$x\in\mathbb{R}^n$ 被称为决策变量。&lt;/li>
+&lt;li>$f$ 被称为目标函数。&lt;/li>
+&lt;li>$\Omega\subseteq\mathbb{R}^n$ 被称为约束集 / 可行集 / 可行区域。&lt;/li>
+&lt;/ul>
+&lt;p>在不失一般性的情况下，可以假设 $G$ 是对称的：&lt;br>
+对于任何 $H\in\mathbb{R}^{n\times n}$ (非对称) 和 $x\in\mathbb{R}^n$，我们有：
+$$\lbrack x^THx\rbrack_{1\times 1}=\lbrack x^THx\rbrack^T_{1\times 1}=x^TH^Tx$$
+因此：
+$$x^THx=x^TH^Tx=\frac12x^T(\underbrace{H^T+H}_{\text{对称矩阵 $G$}})x.$$
+对于 $f(x)=\frac12x^TGx+c^Tx+\beta$ 其中 $G\in\mathbb{R}^{n\times n}$ 是对称的, 我们有:
+$$\nabla f(x)=Gx+c.$$&lt;/p>
+&lt;h1 id="下确界">下确界&lt;/h1>
+&lt;p>$l=\inf S, \inf\emptyset=\infty$&lt;br>
+令 $S\subseteq\mathbb{R}$ 为非空集。 我们有 $l\in[-\infty, \infty)$ 是 $S$ 的下确界，如果：&lt;/p>
+&lt;ul>
+&lt;li>对于任意 $s\in S, s \geq l$&lt;/li>
+&lt;li>对于任意 $\zeta&amp;gt;l(\zeta\in\mathbb{R})$，可以找到 $s\in S$ 使得 $s&amp;lt;\zeta$&lt;/li>
+&lt;/ul>
+&lt;p>下确界是比 $S$ 中所有元素都小的最大数。&lt;br>
+将集合的下确界值称为最优值。&lt;/p>
+&lt;h1 id="范数">范数&lt;/h1>
+&lt;h2 id="常见向量范数">常见向量范数&lt;/h2>
+&lt;ul>
+&lt;li>$l_1$ norm: $\vert\vert x\vert\vert_1:=\sum_{i=1}^{n}|x_i|\quad$ (sum of abs value)&lt;/li>
+&lt;li>$l_2$ norm: $\vert\vert x\vert\vert_2:=\sqrt{\sum_{i=1}^{n}|x_i|^2}\quad$ ($\vert\vert x\vert\vert_2^2=\begin{bmatrix}x1&amp;amp;x2\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=x^Tx$)&lt;/li>
+&lt;li>$l_\infty$ norm: $\vert\vert x\vert\vert_\infty:=\max_{i\leq i\leq n}|x_i|\quad$ (max abs value)&lt;/li>
+&lt;/ul>
+&lt;h2 id="常见矩阵范数">常见矩阵范数&lt;/h2>
+&lt;p>$\vert\vert A\vert\vert_1=\underbrace{\max_j\sum_{i=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of columns}}$&lt;/p>
+&lt;ul>
+&lt;li>induced matrix norm&lt;br>
+$\underset{||x||_1=1}{\max}||Ax||_1$&lt;/li>
+&lt;/ul>
+&lt;p>$\vert\vert A\vert\vert_2=\underbrace{\sqrt{\lambda_{max}(A^TA)}}_{\text{maximum eigenvalue of $A^TA$}}$&lt;/p>
+&lt;ul>
+&lt;li>induced matrix norm&lt;br>
+$\underset{||x||_2=1}{\max}||Ax||_2$&lt;/li>
+&lt;/ul>
+&lt;p>$\vert\vert A\vert\vert_1=\underbrace{\max_i\sum_{j=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of rows}}$&lt;/p>
+&lt;ul>
+&lt;li>induced matrix norm&lt;br>
+$\max_{\vert\vert x\vert\vert_\infty=1}||Ax||_\infty$&lt;/li>
+&lt;/ul>
+&lt;p>$\vert\vert A\vert\vert_F=\underbrace{\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2}}_{\text{known as the Frobenius norm}}$&lt;/p>
+&lt;p>对于对称矩阵 A&lt;br>
+$$\underset{||x||=1}{\min}x^TAx=\lambda_{\min}(A)$$
+$$\underset{||x||=1}{\max}x^TAx=\lambda_{\max}(A)\xlongequal[]{if A\succ0}||A||_2$$&lt;/p>
+&lt;h1 id="正定矩阵">正定矩阵&lt;/h1>
+&lt;h2 id="半正定矩阵">半正定矩阵&lt;/h2>
+&lt;p>令 $A\in\mathbb{R}^{n\times n}$ 为对阵矩阵，如果对于所有 $x\in\mathbb{R}^{n}$，有 $x^TAx\geq0$，则称 $A$ 为半正定矩阵，记作&lt;br>
+$A\succeq0$&lt;br>
+Example:&lt;br>
+$$A=\left[\begin{matrix}3&amp;amp;1\\1&amp;amp;2\end{matrix}\right]$$
+$$x^TAx=\left[\begin{matrix}x1&amp;amp;x2\end{matrix}\right]\left[\begin{matrix}3&amp;amp;1\\1&amp;amp;2\end{matrix}\right]\left[\begin{matrix}x1\\x2\end{matrix}\right]$$
+$$=3x_1^2+2x_1x_2+2x_2^2$$
+$$=2x_1^2+(x_1+x_2)^2+x_2^2\geq0$$&lt;/p>
+&lt;h2 id="正定矩阵-1">正定矩阵&lt;/h2>
+&lt;p>令 $A\in\mathbb{R}^{n\times n}$ 为对阵矩阵，如果对于所有 $x\in\mathbb{R}^{n}$\{0}，有 $x^TAx&amp;gt;0$，则称 $A$ 为正定矩阵，记作
+$A\succ0$&lt;/p>
+&lt;p>if $D\succ0$ (正定)&lt;br>
+$d=-D\nabla f(x)$ 是一个下降方向&lt;/p>
+&lt;h1 id="泰勒定理">泰勒定理&lt;/h1>
+&lt;h2 id="带余项">带余项&lt;/h2>
+&lt;p>假设 $f$ 在包含 $[a,b]$ 的一个开区间上 (n+1) 阶可导。则：
+$$
+f(b) = f(a) + f&amp;rsquo;(a)(b-a) + \frac{f&amp;rsquo;&amp;rsquo;(a)}{2!}(b-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(b-a)^n + \frac{f^{(n+1)}(\xi)}{(n+1)!}(b-a)^{n+1}
+$$
+其中 ${\xi \in (a,b)}$.&lt;/p>
+&lt;h2 id="高维带余项">高维带余项&lt;/h2>
+&lt;p>令 $f\in C^1(\mathbb{R}^n)$, $x$ 和 $y\in\mathbb{R}^n$。则存在
+$\xi\in{(1-s)x+sy:s\in(0,1)}$ 使得
+$$f(y)=f(x)+[\nabla f(\xi)]^T(y-x).$$&lt;/p>
+&lt;p>令 $f\in C^2(\mathbb{R}^n)$, $x$ 和 $y\in\mathbb{R}^n$. 则存在
+$\xi\in {(1-s)x + sy : s \in (0,1)}$ 使得
+$$f(y) = f(x) + [\nabla f(x)]^T (y - x) + \frac{1}{2}(y - x)^T \nabla^2 f(\xi) (y - x).
+$$&lt;/p>
+- https://zhangxume.github.io/zh/posts/optimization-methods-notes/ - 2024 Zephyr. All rights reserved.</description></item><item><title>雅思自学指南</title><link>https://zhangxume.github.io/zh/posts/ielts-self-study-guide/</link><pubDate>Sat, 05 Aug 2023 13:03:04 +0800</pubDate><guid>https://zhangxume.github.io/zh/posts/ielts-self-study-guide/</guid><description>Zephyr's Blog https://zhangxume.github.io/zh/posts/ielts-self-study-guide/ -&lt;h1 id="前言">前言&lt;/h1>
 &lt;p>首先要清楚雅思的考试总体情况，花一段完整的时间专门学习雅思。&lt;/p>
 &lt;p>雅思一共分四个部分。听力，阅读，写作，口语。&lt;/p>
 &lt;blockquote>

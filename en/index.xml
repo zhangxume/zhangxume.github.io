@@ -1,4 +1,87 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/en/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Fri, 22 Sep 2023 21:11:46 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>IELTS Self Study Guide</title><link>https://zhangxume.github.io/en/posts/ielts-self-study-guide/</link><pubDate>Sat, 05 Aug 2023 13:03:04 +0800</pubDate><guid>https://zhangxume.github.io/en/posts/ielts-self-study-guide/</guid><description>Zephyr's Blog https://zhangxume.github.io/en/posts/ielts-self-study-guide/ -&lt;h1 id="preface">Preface&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/en/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Fri, 22 Sep 2023 21:11:46 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimization Methods Notes (1)</title><link>https://zhangxume.github.io/en/posts/optimization-methods-notes/</link><pubDate>Fri, 22 Sep 2023 21:11:46 +0800</pubDate><guid>https://zhangxume.github.io/en/posts/optimization-methods-notes/</guid><description>Zephyr's Blog https://zhangxume.github.io/en/posts/optimization-methods-notes/ -&lt;h1 id="optimization">Optimization&lt;/h1>
+&lt;p>Optimization finds the &amp;ldquo;best&amp;rdquo; possible solutions from a set of feasible points.&lt;/p>
+&lt;p>An optimization problem takes the form of minimizing (or maximizing) an objective function subject to constraints:&lt;/p>
+&lt;p>$$
+\begin{array}{ll}\mathrm{Minimize}&amp;amp;f(x) \\
+\mathrm{subject~to}&amp;amp;x\in\Omega.\end{array}
+$$&lt;/p>
+&lt;ul>
+&lt;li>$x\in\mathbb{R}^n$ is called decision variables.&lt;/li>
+&lt;li>$f$ is called the objective function.&lt;/li>
+&lt;li>$\Omega\subseteq\mathbb{R}^n$ is called the constraint set / feasible set / feasible region.&lt;/li>
+&lt;/ul>
+&lt;p>The symmetry of $G$ can be assume without loss of generality:&lt;br>
+for any $H\in\mathbb{R}^{n\times n}$ (no symmetric) and $x\in\mathbb{R}^n$, we have:
+$$\lbrack x^THx\rbrack_{1\times 1}=\lbrack x^THx\rbrack^T_{1\times 1}=x^TH^Tx$$
+so:
+$$x^THx=x^TH^Tx=\frac12x^T(\underbrace{H^T+H}_{\text{symmetric matrix $G$}})x.$$
+For $f(x)=\frac12x^TGx+c^Tx+\beta$ with $G\in\mathbb{R}^{n\times n}$ being symmetric, so:
+$$\nabla f(x)=Gx+c.$$&lt;/p>
+&lt;h1 id="infimum">Infimum&lt;/h1>
+&lt;p>$l=\inf S, \inf\emptyset=\infty$&lt;br>
+Let $S\subseteq\mathbb{R}$ be a nonempty set. We say that $l\in[-\infty, \infty)$ is the infimum of $S$, if:&lt;/p>
+&lt;ul>
+&lt;li>for every $s\in S, s \geq l$&lt;/li>
+&lt;li>for every $\zeta&amp;gt;l(\zeta\in\mathbb{R})$, one can find $s\in S$ so that $s&amp;lt;\zeta$&lt;/li>
+&lt;/ul>
+&lt;p>infimum is the largest number that is smaller than everything in $S$.&lt;br>
+refer to set the infimum value as the optimal value.&lt;/p>
+&lt;h1 id="norm">Norm&lt;/h1>
+&lt;h2 id="common-vector-norms">Common vector norms&lt;/h2>
+&lt;ul>
+&lt;li>$l_1$ norm: $\vert\vert x\vert\vert_1:=\sum_{i=1}^{n}|x_i|\quad$ (sum of abs value)&lt;/li>
+&lt;li>$l_2$ norm: $\vert\vert x\vert\vert_2:=\sqrt{\sum_{i=1}^{n}|x_i|^2}\quad$ ($\vert\vert x\vert\vert_2^2=\begin{bmatrix}x1&amp;amp;x2\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=x^Tx$)&lt;/li>
+&lt;li>$l_\infty$ norm: $\vert\vert x\vert\vert_\infty:=\max_{i\leq i\leq n}|x_i|\quad$ (max abs value)&lt;/li>
+&lt;/ul>
+&lt;h2 id="common-matrix-norms">Common matrix norms&lt;/h2>
+&lt;p>$\vert\vert A\vert\vert_1=\underbrace{\max_j\sum_{i=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of columns}}$&lt;/p>
+&lt;ul>
+&lt;li>induced matrix norm&lt;br>
+$\underset{||x||_1=1}{\max}||Ax||_1$&lt;/li>
+&lt;/ul>
+&lt;p>$\vert\vert A\vert\vert_2=\underbrace{\sqrt{\lambda_{max}(A^TA)}}_{\text{maximum eigenvalue of $A^TA$}}$&lt;/p>
+&lt;ul>
+&lt;li>induced matrix norm&lt;br>
+$\underset{||x||_2=1}{\max}||Ax||_2$&lt;/li>
+&lt;/ul>
+&lt;p>$\vert\vert A\vert\vert_1=\underbrace{\max_i\sum_{j=1}^{n}|a_{ij}|}_{\text{maximum of the $l_1$ norms of rows}}$&lt;/p>
+&lt;ul>
+&lt;li>induced matrix norm&lt;br>
+$\max_{\vert\vert x\vert\vert_\infty=1}||Ax||_\infty$&lt;/li>
+&lt;/ul>
+&lt;p>$\vert\vert A\vert\vert_F=\underbrace{\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2}}_{\text{known as the Frobenius norm}}$&lt;/p>
+&lt;p>For symmetric A&lt;br>
+$$\underset{||x||=1}{\min}x^TAx=\lambda_{\min}(A)$$
+$$\underset{||x||=1}{\max}x^TAx=\lambda_{\max}(A)\xlongequal[]{if A\succ0}||A||_2$$&lt;/p>
+&lt;h1 id="positive-definite-matrices">Positive definite matrices&lt;/h1>
+&lt;h2 id="positive-semidefinite-matrices">Positive semidefinite matrices&lt;/h2>
+&lt;p>Let $A\in\mathbb{R}^{n\times n}$ be symmetric, we say that $A$ is positive semidefinite if $x^TAx\geq0$, for all $x\in\mathbb{R}^{n}$. $A\succeq0$&lt;br>
+Example:&lt;br>
+$$A=\left[\begin{matrix}3&amp;amp;1\\1&amp;amp;2\end{matrix}\right]$$
+$$x^TAx=\left[\begin{matrix}x1&amp;amp;x2\end{matrix}\right]\left[\begin{matrix}3&amp;amp;1\\1&amp;amp;2\end{matrix}\right]\left[\begin{matrix}x1\\x2\end{matrix}\right]$$
+$$=3x_1^2+2x_1x_2+2x_2^2$$
+$$=2x_1^2+(x_1+x_2)^2+x_2^2\geq0$$&lt;/p>
+&lt;h2 id="positive-definite-matrices-1">Positive definite matrices&lt;/h2>
+&lt;p>Let $A\in\mathbb{R}^{n\times n}$ be symmetric, we say that $A$ is positive definite if $x^TAx&amp;gt;0$, for all $x\in\mathbb{R}^{n}$\{0}.&lt;br>
+$A\succ0$&lt;/p>
+&lt;p>if $D\succ0$ (positive definite)&lt;br>
+$d=-D\nabla f(x)$ is a descent direction&lt;/p>
+&lt;h1 id="taylors-theorem">Taylor&amp;rsquo;s theorem&lt;/h1>
+&lt;h2 id="with-remainder-term">with remainder term&lt;/h2>
+&lt;p>Suppose $f$ is (n+1) times differentiable on an open interval containing $[a,b]$. Then:
+$$
+f(b) = f(a) + f&amp;rsquo;(a)(b-a) + \frac{f&amp;rsquo;&amp;rsquo;(a)}{2!}(b-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(b-a)^n + \frac{f^{(n+1)}(\xi)}{(n+1)!}(b-a)^{n+1}
+$$
+for some ${\xi \in (a,b)}$.&lt;/p>
+&lt;h2 id="with-remainder-term-high-dimensional">with remainder term high-dimensional&lt;/h2>
+&lt;p>Let $f\in C^1(\mathbb{R}^n)$, $x$ and $y\in\mathbb{R}^n$. Then there exists
+$\xi\in{(1-s)x+sy:s\in(0,1)}$ such that
+$$f(y)=f(x)+[\nabla f(\xi)]^T(y-x).$$&lt;/p>
+&lt;p>Let $f\in C^2(\mathbb{R}^n)$, $x$ and $y\in\mathbb{R}^n$. Then there exists
+$\xi\in {(1-s)x + sy : s \in (0,1)}$ such that
+$$f(y) = f(x) + [\nabla f(x)]^T (y - x) + \frac{1}{2}(y - x)^T \nabla^2 f(\xi) (y - x).
+$$&lt;/p>
+- https://zhangxume.github.io/en/posts/optimization-methods-notes/ - 2024 Zephyr. All rights reserved.</description></item><item><title>IELTS Self Study Guide</title><link>https://zhangxume.github.io/en/posts/ielts-self-study-guide/</link><pubDate>Sat, 05 Aug 2023 13:03:04 +0800</pubDate><guid>https://zhangxume.github.io/en/posts/ielts-self-study-guide/</guid><description>Zephyr's Blog https://zhangxume.github.io/en/posts/ielts-self-study-guide/ -&lt;h1 id="preface">Preface&lt;/h1>
 &lt;p>Firstly, it&amp;rsquo;s important to understand the overall structure of the IELTS exam and dedicate a substantial amount of time specifically for IELTS preparation.&lt;/p>
 &lt;p>IELTS consists of four sections: Listening, Reading, Writing, and Speaking.&lt;/p>
 &lt;blockquote>
