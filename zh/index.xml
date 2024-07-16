@@ -1,4 +1,105 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/zh/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Wed, 10 Jul 2024 19:06:57 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>最优化方法笔记 (1)</title><link>https://zhangxume.github.io/zh/posts/optimization-methods-notes/</link><pubDate>Fri, 22 Sep 2023 21:11:46 +0800</pubDate><guid>https://zhangxume.github.io/zh/posts/optimization-methods-notes/</guid><description>Zephyr's Blog https://zhangxume.github.io/zh/posts/optimization-methods-notes/ -&lt;h1 id="最优化">最优化&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/zh/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Wed, 10 Jul 2024 19:06:57 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>InternLM Tutorial Notes (1)</title><link>https://zhangxume.github.io/zh/posts/internlm-tutorial/</link><pubDate>Wed, 10 Jul 2024 19:06:57 +0800</pubDate><guid>https://zhangxume.github.io/zh/posts/internlm-tutorial/</guid><description>Zephyr's Blog https://zhangxume.github.io/zh/posts/internlm-tutorial/ -&lt;h1 id="linux">Linux&lt;/h1>
+&lt;h2 id="ssh-连接">SSH 连接&lt;/h2>
+&lt;p>InternStudio 平台创建个人开发机，使用 VS Code 进行 SSH 远程连接。&lt;br>
+显示 GPU 状态的摘要信息，&lt;code>nvidia-smi&lt;/code>：&lt;/p>
+&lt;p>&lt;img alt="GPU status" src="https://zhangxume.github.io/images/gpu-status.png">&lt;/p>
+&lt;h2 id="端口映射">端口映射&lt;/h2>
+&lt;p>使用 ssh 命令进行端口映射。&lt;br>
+运行一个 web demo，&lt;code>helloworld.py&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> socket
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> re
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> gradio &lt;span style="color:#66d9ef">as&lt;/span> gr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 获取主机名&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_hostname&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hostname &lt;span style="color:#f92672">=&lt;/span> socket&lt;span style="color:#f92672">.&lt;/span>gethostname()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">match&lt;/span> &lt;span style="color:#f92672">=&lt;/span> re&lt;span style="color:#f92672">.&lt;/span>search(&lt;span style="color:#e6db74">r&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-(\d+)$&amp;#39;&lt;/span>, hostname)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">match&lt;/span>&lt;span style="color:#f92672">.&lt;/span>group(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建 Gradio 界面&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> gr&lt;span style="color:#f92672">.&lt;/span>Blocks(gr&lt;span style="color:#f92672">.&lt;/span>themes&lt;span style="color:#f92672">.&lt;/span>Soft()) &lt;span style="color:#66d9ef">as&lt;/span> demo:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html_code &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;p align=&amp;#34;center&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;a href=&amp;#34;https://intern-ai.org.cn/home&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;img src=&amp;#34;https://intern-ai.org.cn/assets/headerLogo-4ea34f23.svg&amp;#34; alt=&amp;#34;Logo&amp;#34; width=&amp;#34;20%&amp;#34; style=&amp;#34;border-radius: 5px;&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;h1 style=&amp;#34;text-align: center;&amp;#34;&amp;gt;☁️ Welcome &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>get_hostname()&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> user, welcome to the ShuSheng LLM Practical Camp Course!&amp;lt;/h1&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;h2 style=&amp;#34;text-align: center;&amp;#34;&amp;gt;😀 Let’s go on a journey through ShuSheng Island together.&amp;lt;/h2&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;p align=&amp;#34;center&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;a href=&amp;#34;https://github.com/InternLM/Tutorial/blob/camp3&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;img src=&amp;#34;https://oss.lingkongstudy.com.cn/blog/202406301604074.jpg&amp;#34; alt=&amp;#34;Logo&amp;#34; width=&amp;#34;20%&amp;#34; style=&amp;#34;border-radius: 5px;&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> gr&lt;span style="color:#f92672">.&lt;/span>Markdown(html_code)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo&lt;span style="color:#f92672">.&lt;/span>launch()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Web IDE 的终端中运行时，没有进行端口映射时，使用本地IP无法访问，端口映射后，在网页中打开链接就可以看到 web ui 的界面。&lt;br>
+VS Code 提供了自动端口映射的功能，不需要手动配置。&lt;/p>
+&lt;p>&lt;img alt="web-demo" src="https://zhangxume.github.io/images/web-demo.png">&lt;/p>
+&lt;h1 id="python">Python&lt;/h1>
+&lt;h2 id="wordcount">Wordcount&lt;/h2>
+&lt;p>实现一个 wordcount 函数，统计英文字符串中每个单词出现的次数。返回一个字典，key 为单词，value 为对应单词出现的次数。&lt;br>
+Example：&lt;br>
+Input：&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;#34;&amp;#34;&amp;#34;Hello world!
+This is an example.
+Word count is fun.
+Is it fun to count words?
+Yes, it is fun!&amp;#34;&amp;#34;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Output：&lt;/p>
+&lt;pre tabindex="0">&lt;code>{&amp;#39;hello&amp;#39;: 1,&amp;#39;world!&amp;#39;: 1,&amp;#39;this&amp;#39;: 1,&amp;#39;is&amp;#39;: 3,&amp;#39;an&amp;#39;: 1,&amp;#39;example&amp;#39;: 1,&amp;#39;word&amp;#39;: 1,
+&amp;#39;count&amp;#39;: 2,&amp;#39;fun&amp;#39;: 1,&amp;#39;Is&amp;#39;: 1,&amp;#39;it&amp;#39;: 2,&amp;#39;to&amp;#39;: 1,&amp;#39;words&amp;#39;: 1,&amp;#39;Yes&amp;#39;: 1,&amp;#39;fun&amp;#39;: 1 }
+&lt;/code>&lt;/pre>&lt;p>函数实现，这里假设 &lt;code>'&lt;/code> 是 &lt;code>it's&lt;/code> 的一部分，不会去掉并拆分为 &lt;code>it is&lt;/code>。简单起见，只考虑实例输入中存在的标点符号：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">wordcount&lt;/span>(text: str):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> punctuation &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#e6db74">&amp;#34;,&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;.&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;!&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;?&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> p &lt;span style="color:#f92672">in&lt;/span> punctuation:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> text&lt;span style="color:#f92672">.&lt;/span>replace(p, &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> text&lt;span style="color:#f92672">.&lt;/span>lower()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> words &lt;span style="color:#f92672">=&lt;/span> text&lt;span style="color:#f92672">.&lt;/span>split()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word_count &lt;span style="color:#f92672">=&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> word &lt;span style="color:#f92672">in&lt;/span> words:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> word &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> word_count:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word_count[word] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word_count[word] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> word_count
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Got this panda plush toy for my daughter&amp;#39;s birthday,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> who loves it and takes it everywhere. It&amp;#39;s soft and
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> super cute, and its face has a friendly look. It&amp;#39;s
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> a bit small for what I paid though. I think there
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> might be other options that are bigger for the
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> same price. It arrived a day earlier than expected,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> so I got to play with it myself before I gave it
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> to her.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result &lt;span style="color:#f92672">=&lt;/span> wordcount(text)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(result)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="debug">Debug&lt;/h2>
+&lt;p>在代码中需要检查的地方点击行号左侧设置断点。例如，在 &lt;code>words = text.split()&lt;/code> 以及 &lt;code>word_count = {}&lt;/code> 这两行设置断点。&lt;br>
+调试过程中检查变量值的状态变化。&lt;br>
+使用字典 &lt;code>word_counts&lt;/code> 统计每个单词出现的次数。如果单词已经在字典中，将其计数加1；如果单词不在字典中，初始化计数为1。&lt;/p>
+&lt;p>&lt;img alt="debug" src="https://zhangxume.github.io/images/debug.png">&lt;/p>
+&lt;p>调试结果，程序正常执行，输出正确的单词计数结果：&lt;/p>
+&lt;p>&lt;img alt="wordcount-result" src="https://zhangxume.github.io/images/wordcount-result.png">&lt;/p>
+&lt;h1 id="git">Git&lt;/h1>
+&lt;p>Github 笔记仓库&lt;/p>
+&lt;h1 id="参考">参考&lt;/h1>
+&lt;p>&lt;a href="https://github.com/InternLM/Tutorial">https://github.com/InternLM/Tutorial&lt;/a>&lt;/p>
+- https://zhangxume.github.io/zh/posts/internlm-tutorial/ - 2024 Zephyr. All rights reserved.</description></item><item><title>最优化方法笔记 (1)</title><link>https://zhangxume.github.io/zh/posts/optimization-methods-notes/</link><pubDate>Fri, 22 Sep 2023 21:11:46 +0800</pubDate><guid>https://zhangxume.github.io/zh/posts/optimization-methods-notes/</guid><description>Zephyr's Blog https://zhangxume.github.io/zh/posts/optimization-methods-notes/ -&lt;h1 id="最优化">最优化&lt;/h1>
 &lt;p>最优化从一组可行点中找到“最佳”解决方案。&lt;/p>
 &lt;p>一个优化问题的形式是最小化（或最大化）目标函数，受制于约束条件：
 $$

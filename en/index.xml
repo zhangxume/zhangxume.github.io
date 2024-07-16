@@ -1,4 +1,105 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/en/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Wed, 10 Jul 2024 19:06:57 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimization Methods Notes (1)</title><link>https://zhangxume.github.io/en/posts/optimization-methods-notes/</link><pubDate>Fri, 22 Sep 2023 21:11:46 +0800</pubDate><guid>https://zhangxume.github.io/en/posts/optimization-methods-notes/</guid><description>Zephyr's Blog https://zhangxume.github.io/en/posts/optimization-methods-notes/ -&lt;h1 id="optimization">Optimization&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zephyr's Blog</title><link>https://zhangxume.github.io/en/</link><description>Recent content on Zephyr's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>2024 Zephyr. All rights reserved.</copyright><lastBuildDate>Wed, 10 Jul 2024 19:06:57 +0800</lastBuildDate><atom:link href="https://zhangxume.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>InternLM Tutorial Notes (1)</title><link>https://zhangxume.github.io/en/posts/internlm-tutorial/</link><pubDate>Wed, 10 Jul 2024 19:06:57 +0800</pubDate><guid>https://zhangxume.github.io/en/posts/internlm-tutorial/</guid><description>Zephyr's Blog https://zhangxume.github.io/en/posts/internlm-tutorial/ -&lt;h1 id="linux">Linux&lt;/h1>
+&lt;h2 id="ssh-connection">SSH Connection&lt;/h2>
+&lt;p>Create a personal development machine and SSH remote connection using VS Code on InternStudio platform.&lt;br>
+Display summary information about GPU status, &lt;code>nvidia-smi&lt;/code>：&lt;/p>
+&lt;p>&lt;img alt="GPU status" src="https://zhangxume.github.io/images/gpu-status.png">&lt;/p>
+&lt;h2 id="port-mapping">Port Mapping&lt;/h2>
+&lt;p>Use the ssh command for port mapping.&lt;br>
+Run a web demo, &lt;code>helloworld.py&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> socket
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> re
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> gradio &lt;span style="color:#66d9ef">as&lt;/span> gr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># get hostname&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_hostname&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hostname &lt;span style="color:#f92672">=&lt;/span> socket&lt;span style="color:#f92672">.&lt;/span>gethostname()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">match&lt;/span> &lt;span style="color:#f92672">=&lt;/span> re&lt;span style="color:#f92672">.&lt;/span>search(&lt;span style="color:#e6db74">r&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-(\d+)$&amp;#39;&lt;/span>, hostname)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">match&lt;/span>&lt;span style="color:#f92672">.&lt;/span>group(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create Gradio interface&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> gr&lt;span style="color:#f92672">.&lt;/span>Blocks(gr&lt;span style="color:#f92672">.&lt;/span>themes&lt;span style="color:#f92672">.&lt;/span>Soft()) &lt;span style="color:#66d9ef">as&lt;/span> demo:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html_code &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;p align=&amp;#34;center&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;a href=&amp;#34;https://intern-ai.org.cn/home&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;img src=&amp;#34;https://intern-ai.org.cn/assets/headerLogo-4ea34f23.svg&amp;#34; alt=&amp;#34;Logo&amp;#34; width=&amp;#34;20%&amp;#34; style=&amp;#34;border-radius: 5px;&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;h1 style=&amp;#34;text-align: center;&amp;#34;&amp;gt;☁️ Welcome &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>get_hostname()&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> user, welcome to the ShuSheng LLM Practical Camp Course!&amp;lt;/h1&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;h2 style=&amp;#34;text-align: center;&amp;#34;&amp;gt;😀 Let’s go on a journey through ShuSheng Island together.&amp;lt;/h2&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;p align=&amp;#34;center&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;a href=&amp;#34;https://github.com/InternLM/Tutorial/blob/camp3&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;img src=&amp;#34;https://oss.lingkongstudy.com.cn/blog/202406301604074.jpg&amp;#34; alt=&amp;#34;Logo&amp;#34; width=&amp;#34;20%&amp;#34; style=&amp;#34;border-radius: 5px;&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> gr&lt;span style="color:#f92672">.&lt;/span>Markdown(html_code)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo&lt;span style="color:#f92672">.&lt;/span>launch()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When running in the terminal of the Web IDE without port mapping, you can&amp;rsquo;t access it with local IP, but after port mapping, you can see the web ui interface when you open the link in the web page.&lt;br>
+VS Code provides automatic port mapping without the need to configure it manually.&lt;/p>
+&lt;p>&lt;img alt="web-demo" src="https://zhangxume.github.io/images/web-demo.png">&lt;/p>
+&lt;h1 id="python">Python&lt;/h1>
+&lt;h2 id="wordcount">Wordcount&lt;/h2>
+&lt;p>Implements a wordcount function that counts the number of times each word occurs in an English string. Returns a dictionary with key as the word and value as the number of times the word occurs.&lt;br>
+Example：&lt;br>
+Input：&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;#34;&amp;#34;&amp;#34;Hello world!
+This is an example.
+Word count is fun.
+Is it fun to count words?
+Yes, it is fun!&amp;#34;&amp;#34;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Output：&lt;/p>
+&lt;pre tabindex="0">&lt;code>{&amp;#39;hello&amp;#39;: 1,&amp;#39;world!&amp;#39;: 1,&amp;#39;this&amp;#39;: 1,&amp;#39;is&amp;#39;: 3,&amp;#39;an&amp;#39;: 1,&amp;#39;example&amp;#39;: 1,&amp;#39;word&amp;#39;: 1,
+&amp;#39;count&amp;#39;: 2,&amp;#39;fun&amp;#39;: 1,&amp;#39;Is&amp;#39;: 1,&amp;#39;it&amp;#39;: 2,&amp;#39;to&amp;#39;: 1,&amp;#39;words&amp;#39;: 1,&amp;#39;Yes&amp;#39;: 1,&amp;#39;fun&amp;#39;: 1 }
+&lt;/code>&lt;/pre>&lt;p>Function implementation, where it is assumed that &lt;code>'&lt;/code> is part of &lt;code>it's&lt;/code> and will not be removed and split into &lt;code>it is&lt;/code>. For simplicity, consider only the punctuation present in the example inputs:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">wordcount&lt;/span>(text: str):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> punctuation &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#e6db74">&amp;#34;,&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;.&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;!&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;?&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> p &lt;span style="color:#f92672">in&lt;/span> punctuation:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> text&lt;span style="color:#f92672">.&lt;/span>replace(p, &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> text&lt;span style="color:#f92672">.&lt;/span>lower()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> words &lt;span style="color:#f92672">=&lt;/span> text&lt;span style="color:#f92672">.&lt;/span>split()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word_count &lt;span style="color:#f92672">=&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> word &lt;span style="color:#f92672">in&lt;/span> words:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> word &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> word_count:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word_count[word] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word_count[word] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> word_count
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Got this panda plush toy for my daughter&amp;#39;s birthday,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> who loves it and takes it everywhere. It&amp;#39;s soft and
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> super cute, and its face has a friendly look. It&amp;#39;s
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> a bit small for what I paid though. I think there
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> might be other options that are bigger for the
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> same price. It arrived a day earlier than expected,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> so I got to play with it myself before I gave it
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> to her.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result &lt;span style="color:#f92672">=&lt;/span> wordcount(text)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(result)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="debug">Debug&lt;/h2>
+&lt;p>Click on the left side of the line number to set a breakpoint in the code where you want to check. For example, set breakpoints at lines &lt;code>words = text.split()&lt;/code> and &lt;code>word_count = {}&lt;/code>.&lt;br>
+Check for changes in the state of variable values during debugging.&lt;br>
+Use the dictionary &lt;code>word_counts&lt;/code> to count the number of times each word occurs. If the word is already in the dictionary, add 1 to the count; if the word is not in the dictionary, initialize the count to 1.&lt;/p>
+&lt;p>&lt;img alt="debug" src="https://zhangxume.github.io/images/debug.png">&lt;/p>
+&lt;p>Debugging results, the program executes normally and outputs the correct word count results:&lt;/p>
+&lt;p>&lt;img alt="wordcount-result" src="https://zhangxume.github.io/images/wordcount-result.png">&lt;/p>
+&lt;h1 id="git">Git&lt;/h1>
+&lt;p>Github Notes Repository&lt;/p>
+&lt;h1 id="reference">Reference&lt;/h1>
+&lt;p>&lt;a href="https://github.com/InternLM/Tutorial">https://github.com/InternLM/Tutorial&lt;/a>&lt;/p>
+- https://zhangxume.github.io/en/posts/internlm-tutorial/ - 2024 Zephyr. All rights reserved.</description></item><item><title>Optimization Methods Notes (1)</title><link>https://zhangxume.github.io/en/posts/optimization-methods-notes/</link><pubDate>Fri, 22 Sep 2023 21:11:46 +0800</pubDate><guid>https://zhangxume.github.io/en/posts/optimization-methods-notes/</guid><description>Zephyr's Blog https://zhangxume.github.io/en/posts/optimization-methods-notes/ -&lt;h1 id="optimization">Optimization&lt;/h1>
 &lt;p>Optimization finds the &amp;ldquo;best&amp;rdquo; possible solutions from a set of feasible points.&lt;/p>
 &lt;p>An optimization problem takes the form of minimizing (or maximizing) an objective function subject to constraints:&lt;/p>
 &lt;p>$$
